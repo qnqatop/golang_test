@@ -1,10 +1,43 @@
 version: '3'
 
 services:
+#  nats:
+#    image: nats:2.10.11
+#    entrypoint: "/gnatsd -DV"
+#    expose:
+#      - "4222"
+#    ports:
+#      - "8222:8222"
+#    hostname: nats-server
   pg:
-    image: postgres:13.3
-    ports:
-      - '5432:5432'
+    image: postgres:15-alpine3.18
+    restart: always
+    volumes:
+      - ./docker/db/postgres:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: base
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: userPass
+    ports:
+      - 5432:5432
+
+#  ch_server:
+#    image: yandex/clickhouse-server
+#    ports:
+#      - "8123:8123"
+#    volumes:
+#      - ./docker/db/clickhouse:/var/lib/clickhouse
+#    networks:
+#      - ch_ntw
+
+  cache:
+    image: redis:6-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - /docker/redis/cache:/data
+    environment:
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ''

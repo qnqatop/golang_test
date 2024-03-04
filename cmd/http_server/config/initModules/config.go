@@ -23,5 +23,6 @@ func NewConfig() *Config {
 	cfg := Config{}
 	cfg.initPostgresSql()
 	cfg.initRedis()
-	return &cfg
+	ApplicationConfig = &cfg
+	return ApplicationConfig
 }

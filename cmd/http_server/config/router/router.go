@@ -18,10 +18,10 @@ func Router() *chi.Mux {
 
 	r.Route("/good", func(r chi.Router) {
 		r.Post("/create", appController.GoodsController.Create)
-		r.Patch("/update/{id}", appController.GoodsController.Update)
-		r.Delete("/remove/{id}", appController.GoodsController.Delete)
+		r.Patch("/update", appController.GoodsController.Update)
+		r.Delete("/remove", appController.GoodsController.Delete)
 		r.Get("/list", appController.GoodsController.List)
-		r.Patch("/rePrioritize?", appController.GoodsController.RePrioritize)
+		r.Patch("/rePrioritize", appController.GoodsController.RePrioritize)
 	})
 	return r
 }

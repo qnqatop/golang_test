@@ -1,22 +1,23 @@
 package main
 
 import (
-	"fmt"
 	"golang_testovoe/cmd/http_server/config/initModules"
 	"golang_testovoe/cmd/http_server/config/router"
+	"log"
 	"net/http"
 	"os"
 )
 
 func init() {
-	initModules.NewConfig()
 }
 
 func main() {
 	r := router.Router()
+	initModules.NewConfig()
+
 	err := http.ListenAndServe(":8080", r)
+	log.Default().Print("Server Started")
 	if err != nil {
 		os.Exit(1)
 	}
-	fmt.Print("Server Started")
 }

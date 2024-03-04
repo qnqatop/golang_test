@@ -22,6 +22,17 @@ type GoodsUpdateRequest struct {
 }
 
 type GoodsDeleteResponse struct {
-	ID      int  `json:"id"`
-	Removed bool `json:"removed"`
+	ID        int  `json:"id"`
+	ProjectId int  `json:"project_id"`
+	Removed   bool `json:"removed"`
+}
+
+var GoodsResponseList struct {
+	Meta struct {
+		Total   int `json:"total"`
+		Removed int `json:"removed"`
+		Limit   int `json:"limit"`
+		Offset  int `json:"offset"`
+	} `json:"meta"`
+	Goods []GoodsResponse `json:"goods"`
 }
